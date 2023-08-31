@@ -10,4 +10,8 @@
 # !.yarn/cache
 .pnp.*
 
+# Dependencies
 /node_modules
+
+# Build
+/dist
