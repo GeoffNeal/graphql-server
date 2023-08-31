@@ -1,8 +1,11 @@
 import fs from "fs";
 import csvParser from "csv-parser";
 
-/** Reads a csv file.
- * Converts it into a json object
+/**
+ * Converts the contents of a specified .csv file to JSON
+ *
+ * @param filepath The path to the .csv file that you want to convert to JSON
+ * @returns A Promise that resolves to an array of the contents of the .csv
  */
 export const readCSV = async <T>(filepath: string): Promise<T[]> => {
   const fp = new URL(filepath, import.meta.url);
