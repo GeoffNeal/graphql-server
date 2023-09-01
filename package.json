@@ -4,15 +4,24 @@
   "type": "module",
   "scripts": {
     "compile": "tsc",
-    "start": "yarn compile && node ./dist/index.js"
+    "start": "yarn compile && node ./dist/index.js",
+    "create-db": "psql -U postgres < ./src/db/schema.sql",
+    "seed": "yarn compile && yarn create-db && node ./dist/db/seed.js --product ../../data/product.csv --customer ../../data/customer.csv"
   },
   "dependencies": {
     "@apollo/server": "^4.9.3",
     "csv-parser": "^3.0.0",
-    "graphql": "^16.8.0"
+    "dotenv": "^16.3.1",
+    "graphql": "^16.8.0",
+    "minimist": "^1.2.8",
+    "pg": "^8.11.3",
+    "pg-pool": "^3.6.1"
   },
   "devDependencies": {
+    "@types/minimist": "^1.2.2",
     "@types/node": "^20.5.7",
+    "@types/pg": "^8.10.2",
+    "@types/pg-pool": "^2.0.3",
     "typescript": "^5.2.2"
   }
 }

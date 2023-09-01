@@ -15,3 +15,6 @@
 
 # Build
 /dist
+
+# Environment
+.env
