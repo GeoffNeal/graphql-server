@@ -1,41 +1,7 @@
-import path from "path";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-
-// Utils
-import { readCSV } from "./utils/data.js";
-
-const typeDefs = `#graphql
-  # The types of car available
-  type Product {
-    vin: String
-    colour: String
-    make: String
-    model: String
-    price: Int
-  }
-
-  # Customer details
-  type Customer {
-    email: String
-    forename: String
-    surname: String
-    contact_number: String
-    postcode: String
-  }
-
-  type Query {
-    products: [Product],
-    customers: [Customer],
-  }
-`;
-
-const resolvers = {
-  Query: {
-    products: () => readCSV(path.resolve(process.cwd(), "data/product.csv")),
-    customers: () => readCSV(path.resolve(process.cwd(), "data/customer.csv")),
-  },
-};
+import typeDefs from "./graphql/typeDefs.js";
+import resolvers from "./graphql/resolvers.js";
 
 const server = new ApolloServer({
   typeDefs,
