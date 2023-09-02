@@ -6,7 +6,7 @@ const resolvers = {
       __: any,
       // Apollo server context includes a dataSources property
       { dataSources }: { dataSources: GQLDataSources }
-    ): Promise<Product[]> => {
+    ) => {
       const { err, res } = await dataSources.products.read<Product>();
 
       if (err) {
