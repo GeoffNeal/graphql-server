@@ -34,14 +34,10 @@ interface ISource {
   read<T>(): Promise<{ err: Error | null; res: T[] | null }>;
 }
 
-interface IDataSource {
-  fetch<T>(): Promise<{ err: Error | null; res: T[] | null }>;
-}
-
 /**
  *
  */
 type GQLDataSources = {
-  products: IDataSource;
-  customers: IDataSource;
+  products: ISource;
+  customers: ISource;
 };

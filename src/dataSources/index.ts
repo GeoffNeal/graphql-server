@@ -8,7 +8,7 @@ import CSV from "./formats/CSV.js";
 /**
  * Provides functionality to retrieve data from a specified source
  */
-class DataSource implements IDataSource {
+class DataSource extends Source {
   private creator: Source;
 
   /**
@@ -17,6 +17,7 @@ class DataSource implements IDataSource {
    * @param type The type of data you wish to retrieve
    */
   constructor(format: Format, type: DataType) {
+    super(type);
     switch (format) {
       case "csv":
         this.creator = new CSV(type);
@@ -35,7 +36,7 @@ class DataSource implements IDataSource {
    *
    * @returns Promise that resolves to an array of the specified data type
    */
-  async fetch<T>(): Promise<{ err: Error | null; res: T[] | null }> {
+  async read<T>(): Promise<{ err: Error | null; res: T[] | null }> {
     return await this.creator.read<T>();
   }
 }
