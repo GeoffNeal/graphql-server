@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "compile": "tsc",
-    "start": "yarn compile && node ./dist/index.js",
+    "start:server": "yarn compile && node ./dist/index.js",
+    "start:client": "webpack-dev-server ./client/index.js",
     "create-db": "psql -U postgres < ./src/db/schema.sql",
     "seed": "yarn compile && yarn create-db && node ./dist/db/seed.js --product ../../data/product.csv --customer ../../data/customer.csv"
   },
@@ -15,13 +16,25 @@
     "graphql": "^16.8.0",
     "minimist": "^1.2.8",
     "pg": "^8.11.3",
-    "pg-pool": "^3.6.1"
+    "pg-pool": "^3.6.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.11",
+    "@babel/plugin-transform-runtime": "^7.22.10",
+    "@babel/preset-env": "^7.22.14",
+    "@babel/preset-react": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.11",
     "@types/minimist": "^1.2.2",
     "@types/node": "^20.5.7",
     "@types/pg": "^8.10.2",
     "@types/pg-pool": "^2.0.3",
-    "typescript": "^5.2.2"
+    "babel-loader": "^9.1.3",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.2.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   }
 }
