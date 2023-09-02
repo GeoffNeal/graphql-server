@@ -29,6 +29,12 @@ class DataSource implements IDataSource {
     }
   }
 
+  /**
+   * Fetch data from either Postgres or a CSV file, depending on what
+   * was specified at instantiation
+   *
+   * @returns Promise that resolves to an array of the specified data type
+   */
   async fetch<T>(): Promise<{ err: Error | null; res: T[] | null }> {
     return await this.creator.read<T>();
   }
