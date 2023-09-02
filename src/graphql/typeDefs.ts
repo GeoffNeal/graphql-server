@@ -19,7 +19,9 @@ const typeDefs = `#graphql
 
   type Query {
     products: [Product],
+    product(vin: ID!): Product
     customers: [Customer],
+    customer(surname: String!): Customer
   }
 `;
 

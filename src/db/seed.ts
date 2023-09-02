@@ -1,4 +1,5 @@
 import minimist from "minimist";
+import dotenv from "dotenv";
 
 // db
 import db from "./db.js";
@@ -6,6 +7,9 @@ import { insertProduct, insertCustomer } from "./queries.js";
 
 // Utils
 import { readCSV } from "../utils/data.js";
+
+//load the .env file
+dotenv.config();
 
 const seed = async () => {
   const args = minimist(process.argv.slice(2));
@@ -19,7 +23,7 @@ const seed = async () => {
   products.forEach(async (entry) => {
     const { vin, colour, make, model, price } = entry;
     await client
-      .query(insertProduct, [vin, colour, make, model, price])
+      .query(insertProduct, [vin.trim(), colour, make, model, price])
       .catch((err) => {
         console.error(err);
         process.exit(1);

@@ -7,7 +7,7 @@ const resolvers = {
       // Apollo server context includes a dataSources property
       { dataSources }: { dataSources: GQLDataSources }
     ): Promise<Product[]> => {
-      const { err, res } = await dataSources.products.fetch<Product>();
+      const { err, res } = await dataSources.products.read<Product>();
 
       if (err) {
         // Do thing with error
@@ -19,22 +19,51 @@ const resolvers = {
 
       return res;
     },
-    customers: async (
-      // Unused positional arguments, so any type is given
+
+    product: async (
       _: any,
-      __: any,
-      // Apollo server context includes a dataSources property
+      args: { vin: string },
       { dataSources }: { dataSources: GQLDataSources }
     ) => {
-      const { err, res } = await dataSources.customers.fetch<Customer>();
+      const { err, res } = await dataSources.products.read<Product>();
 
       if (err) {
-        // Do thing with error
-        // As above
+        throw new Error(err.message);
+      }
+
+      // Return the product with the matching vin number
+      return res.find((product: Product) => product.vin === args.vin);
+    },
+
+    customers: async (
+      _: any,
+      __: any,
+      { dataSources }: { dataSources: GQLDataSources }
+    ) => {
+      const { err, res } = await dataSources.customers.read<Customer>();
+
+      if (err) {
         throw new Error(err.message);
       }
 
       return res;
+    },
+
+    customer: async (
+      _: any,
+      args: { surname: string },
+      { dataSources }: { dataSources: GQLDataSources }
+    ) => {
+      const { err, res } = await dataSources.customers.read<Customer>();
+
+      if (err) {
+        throw new Error(err.message);
+      }
+
+      // Return the customer with the matching surname
+      return res.find(
+        (customer: Customer) => customer.surname === args.surname
+      );
     },
   },
 };
