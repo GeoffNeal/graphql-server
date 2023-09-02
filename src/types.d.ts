@@ -29,3 +29,19 @@ type Format = "csv" | "postgres";
  * Possible entities that data can be retrieved for
  */
 type DataType = "product" | "customer";
+
+interface ISource {
+  read<T>(): Promise<{ err: Error | null; res: T[] | null }>;
+}
+
+interface IDataSource {
+  fetch<T>(): Promise<{ err: Error | null; res: T[] | null }>;
+}
+
+/**
+ *
+ */
+type GQLDataSources = {
+  products: IDataSource;
+  customers: IDataSource;
+};

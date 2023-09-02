@@ -12,7 +12,7 @@ import { readCSV } from "../utils/data.js";
  * Abstract for classes that represent
  * types of data source
  */
-abstract class Source {
+export abstract class Source implements ISource {
   type: DataType;
 
   constructor(type: DataType) {
@@ -50,7 +50,7 @@ class Postgres extends Source {
    * Get the SQL query relating to specified type
    * @returns A Postgres SQL query
    */
-  getPgQuery() {
+  getSQLQuery() {
     switch (this.type) {
       case "product":
         return getAllProducts;
@@ -71,11 +71,12 @@ class Postgres extends Source {
     await this.connect();
 
     // Ensure you are using the correct pg query
-    const dbQuery: string = this.getPgQuery();
+    const dbQuery: string = this.getSQLQuery();
 
     try {
       // Run the query to retrieve all rows relating to the specified type
       const res: QueryResult<T> = await this.client.query(dbQuery);
+
       // Format the response so that it has the same structure
       // for both successful and unsuccessful requests.
       return { err: null, res: res.rows };
@@ -85,6 +86,7 @@ class Postgres extends Source {
       // but for now I'm just logging to the console.
       console.log("Something went wrong");
       console.error(err);
+
       // Format the response so that it has the same structure
       // for both successful and unsuccessful requests.
       return { err, res: null };
@@ -125,7 +127,7 @@ class CSV extends Source {
 /**
  * Provides functionality to retrieve data from a specified source
  */
-class DataSource {
+class DataSource implements IDataSource {
   private creator: Source;
 
   /**

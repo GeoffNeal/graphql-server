@@ -1,12 +1,13 @@
-import DataSource from "../datasources/DataSource.js";
-
 const resolvers = {
   Query: {
-    products: async (): Promise<Product[]> => {
-      const { err, res } = await new DataSource(
-        process.env.DATASOURCE_FORMAT as Format,
-        "product"
-      ).fetch<Product>();
+    products: async (
+      // Unused positional arguments, so any type is given
+      _: any,
+      __: any,
+      // Apollo server context includes a dataSources property
+      { dataSources }: { dataSources: GQLDataSources }
+    ): Promise<Product[]> => {
+      const { err, res } = await dataSources.products.fetch<Product>();
 
       if (err) {
         // Do thing with error
@@ -18,11 +19,14 @@ const resolvers = {
 
       return res;
     },
-    customers: async () => {
-      const { err, res } = await new DataSource(
-        process.env.DATASOURCE_FORMAT as Format,
-        "customer"
-      ).fetch<Customer>();
+    customers: async (
+      // Unused positional arguments, so any type is given
+      _: any,
+      __: any,
+      // Apollo server context includes a dataSources property
+      { dataSources }: { dataSources: GQLDataSources }
+    ) => {
+      const { err, res } = await dataSources.customers.fetch<Customer>();
 
       if (err) {
         // Do thing with error
