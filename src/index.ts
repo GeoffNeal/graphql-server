@@ -3,6 +3,11 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import typeDefs from "./graphql/typeDefs.js";
 import resolvers from "./graphql/resolvers.js";
 
+import dotenv from "dotenv";
+
+//load the .env file
+dotenv.config();
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
