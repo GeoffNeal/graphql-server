@@ -1,3 +1,4 @@
+import * as React from "react";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -40,9 +41,11 @@ const router = createBrowserRouter([
 
 const App = () => {
   return (
-    <ApolloProvider client={client}>
-      <RouterProvider router={router} />
-    </ApolloProvider>
+    <React.StrictMode>
+      <ApolloProvider client={client}>
+        <RouterProvider router={router} />
+      </ApolloProvider>
+    </React.StrictMode>
   );
 };
 
