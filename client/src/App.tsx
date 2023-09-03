@@ -1,5 +1,7 @@
 import { useQuery, gql } from "@apollo/client";
 
+import MyComponent from "./components/MyComponent.js";
+
 const query = gql`
   {
     products {
@@ -14,7 +16,7 @@ const App = () => {
   return (
     <main>
       <h1>Hello world</h1>
-      <h3>{JSON.stringify(data)}</h3>
+      <MyComponent>{JSON.stringify(data)}</MyComponent>
     </main>
   );
 };
