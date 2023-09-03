@@ -1,4 +1,5 @@
 import { resolve as _resolve } from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
@@ -6,13 +7,13 @@ const __dirname = new URL(".", import.meta.url).pathname;
 After that apply all the rules in module.rules and produce the output and place it in main.js in the public folder.*/
 const config = {
   mode: "development",
-  entry: _resolve(__dirname, "client/index.js"),
+  entry: _resolve(__dirname, "dist/client/index.js"),
   output: {
     /** "path"
      * the folder path of the output file
      */
-    path: _resolve(__dirname, "client/dist/scripts"),
-    publicPath: "/client/dist/scripts/",
+    path: _resolve(__dirname, "dist/client"),
+    publicPath: "/dist/client/",
     /** "filename"
      * the name of the output file
      */
@@ -27,7 +28,7 @@ const config = {
     /** "static"
      * This property tells Webpack what static file it should serve
      */
-    static: ["./client/public"],
+    static: ["./dist/client/public"],
     /** "open"
      * opens the browser after server is successfully started
      */
@@ -65,6 +66,12 @@ const config = {
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: "public/index.html", // Need to set id = "root" on body so that react can hook into it
+      template: "./client/public/index.html",
+    }),
+  ],
 };
 
 export default config;

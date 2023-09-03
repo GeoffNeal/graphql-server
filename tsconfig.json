@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "jsx": "react",
-    "rootDirs": ["src"],
+    "jsx": "react-jsx",
+    "rootDirs": ["src", "client"],
     "outDir": "dist",
     "lib": ["es2020", "DOM", "DOM.Iterable"],
     "target": "es2020",
