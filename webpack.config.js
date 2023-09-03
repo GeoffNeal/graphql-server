@@ -68,7 +68,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: "public/index.html", // Need to set id = "root" on body so that react can hook into it
+      filename: "public/index.html",
       template: "./client/public/index.html",
     }),
   ],

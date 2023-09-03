@@ -1,23 +1,47 @@
-import { useQuery, gql } from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import MyComponent from "./components/MyComponent.js";
+// Routes
+import RootRoute from "./routes/RootRoute.js";
+import ProductsRoute from "./routes/ProductsRoute.js";
+import CustomersRoute from "./routes/CustomersRoute.js";
+import ErrorRoute from "./routes/ErrorRoute.js";
 
-const query = gql`
+// Styles
+// import "../styles.global.css";
+
+const client = new ApolloClient({
+  uri: "http://127.0.0.1:4000",
+  cache: new InMemoryCache(),
+});
+
+const router = createBrowserRouter([
   {
-    products {
-      make
-      model
-    }
-  }
-`;
+    path: "/",
+    element: <RootRoute />,
+    errorElement: <ErrorRoute />,
+    children: [
+      {
+        path: "/",
+        element: <h2>Hello</h2>,
+      },
+      {
+        path: "/products",
+        element: <ProductsRoute />,
+      },
+      {
+        path: "/customers",
+        element: <CustomersRoute />,
+      },
+    ],
+  },
+]);
 
 const App = () => {
-  const { data } = useQuery(query);
   return (
-    <main>
-      <h1>Hello world</h1>
-      <MyComponent>{JSON.stringify(data)}</MyComponent>
-    </main>
+    <ApolloProvider client={client}>
+      <RouterProvider router={router} />
+    </ApolloProvider>
   );
 };
 
