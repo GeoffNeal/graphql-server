@@ -8,7 +8,7 @@ import CustomersRoute from "./routes/CustomersRoute.js";
 import ErrorRoute from "./routes/ErrorRoute.js";
 
 // Styles
-// import "../styles.global.css";
+import "../styles.global.css";
 
 const client = new ApolloClient({
   uri: "http://127.0.0.1:4000",

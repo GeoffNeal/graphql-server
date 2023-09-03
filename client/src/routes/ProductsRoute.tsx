@@ -17,9 +17,6 @@ const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  padding: 0;
-  margin: 0;
-  list-style: none;
 `;
 
 const Item = styled.li`

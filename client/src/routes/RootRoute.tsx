@@ -6,7 +6,7 @@ const Main = styled.main`
   justify-content: center;
   align-items: stretch;
   padding: 1rem;
-  min-height: calc(100vh - 2rem);
+  min-height: 100vh;
   background: linear-gradient(#efefef, #cdcdcd);
 `;
 
@@ -25,7 +25,6 @@ const InnerContainer = styled.div`
 
 const SideDrawer = styled.div`
   width: 15%;
-  padding: 1rem;
   background-color: #f7f7f7;
   border-right: 1px solid #e4e4e4;
   border-top-left-radius: 10px;
@@ -33,10 +32,22 @@ const SideDrawer = styled.div`
 `;
 
 const Link = styled(NavLink)`
-  color: green;
+  padding: 1rem;
+  width: 100%;
+  display: inline-block;
+  color: #e4e4e4;
+  background-color: #a9a9a5;
+  border-right: 0px solid #7b85fe;
+  transition: border-right-width 0.1s linear;
 
+  ${SideDrawer} ul li:first-child & {
+    border-top-left-radius: 10px;
+  }
+
+  &:hover,
   &.active {
-    color: yellow;
+    background-color: #6868f4;
+    border-right-width: 5px;
   }
 `;
 
