@@ -1,8 +1,21 @@
-import React from "react";
+import { useQuery, gql } from "@apollo/client";
+
+const query = gql`
+  {
+    products {
+      make
+      model
+    }
+  }
+`;
 
 const App = () => {
+  const { data } = useQuery(query);
   return (
-    <h1>Welcome to React App thats build using Webpack and Babel separately</h1>
+    <main>
+      <h1>Hello world</h1>
+      <h3>{JSON.stringify(data)}</h3>
+    </main>
   );
 };
 
