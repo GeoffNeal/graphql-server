@@ -47,7 +47,7 @@ class DataSource extends Source {
    *
    * @returns Promise that resolves to an array of the specified data type
    */
-  async write(data: Entity): Promise<ArrayResponse<Entity>> {
+  async write(data: Entity): Promise<void> {
     return await this.creator.write(data);
   }
 }
