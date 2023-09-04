@@ -1,4 +1,5 @@
 import { useQuery, gql } from "@apollo/client";
+import { styled } from "styled-components";
 
 // Components
 import Display, { DisplayItem } from "../components/Display.js";
@@ -8,10 +9,13 @@ const query = gql`
     customers {
       forename
       surname
-      email
-      contact_number
     }
   }
+`;
+
+const Name = styled.p`
+  width: 100%;
+  text-align: center;
 `;
 
 export default function CustomersRoute() {
@@ -26,10 +30,9 @@ export default function CustomersRoute() {
           key={customer.email}
           imgSrc={"https://picsum.photos/id/64/250/200?greyscale"}
         >
-          <p>{customer.forename}</p>
-          <p>{customer.surname}</p>
-          <p>{customer.email}</p>
-          <p>{customer.contact_number}</p>
+          <Name>
+            {customer.forename} {customer.surname}
+          </Name>
         </DisplayItem>
       ))}
     </Display>

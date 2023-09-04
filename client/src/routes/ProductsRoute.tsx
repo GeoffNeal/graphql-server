@@ -1,4 +1,5 @@
 import { useQuery, gql } from "@apollo/client";
+import { styled } from "styled-components";
 
 // Components
 import Display, { DisplayItem } from "../components/Display.js";
@@ -9,10 +10,13 @@ const query = gql`
       vin
       make
       model
-      colour
-      price
     }
   }
+`;
+
+const Name = styled.p`
+  width: 100%;
+  text-align: center;
 `;
 
 export default function ProductsRoute() {
@@ -27,10 +31,9 @@ export default function ProductsRoute() {
           key={product.vin}
           imgSrc={"https://picsum.photos/id/111/250/200?greyscale"}
         >
-          <p>{product.make}</p>
-          <p>{product.model}</p>
-          <p>{product.colour}</p>
-          <p>{product.price}</p>
+          <Name>
+            {product.make} {product.model}
+          </Name>
         </DisplayItem>
       ))}
     </Display>
