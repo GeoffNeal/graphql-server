@@ -10,7 +10,7 @@ import DataSource from "./src/dataSources/index.js";
 //load the .env file
 dotenv.config();
 
-const server = new ApolloServer({
+const server = new ApolloServer<ApolloContext>({
   typeDefs,
   resolvers,
 });

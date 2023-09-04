@@ -39,7 +39,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-const App = () => {
+export default function App() {
   return (
     <React.StrictMode>
       <ApolloProvider client={client}>
@@ -47,6 +47,4 @@ const App = () => {
       </ApolloProvider>
     </React.StrictMode>
   );
-};
-
-export default App;
+}

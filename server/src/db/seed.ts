@@ -1,24 +1,25 @@
-import minimist from "minimist";
+import path from "path";
 import dotenv from "dotenv";
 
 // db
-import db from "./db.js";
+import db from "./postgres.js";
 import { insertProduct, insertCustomer } from "./queries.js";
 
 // Utils
-import { readCSV } from "../utils/data.js";
+import { readCSV } from "../utils/csv.js";
 
 //load the .env file
 dotenv.config();
 
 const seed = async () => {
-  const args = minimist(process.argv.slice(2));
-  const productCsvFile = args["product"];
-  const customerCsvFile = args["customer"];
   const client = await db.connect();
 
-  const products: Product[] = await readCSV(productCsvFile);
-  const customers: Customer[] = await readCSV(customerCsvFile);
+  const products: Product[] = await readCSV(
+    path.resolve(process.cwd(), `data/product.csv`)
+  );
+  const customers: Customer[] = await readCSV(
+    path.resolve(process.cwd(), `data/customer.csv`)
+  );
 
   products.forEach(async (entry) => {
     const { vin, colour, make, model, price } = entry;

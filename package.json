@@ -7,13 +7,14 @@
     "start:server": "node ./dist/server/index.js",
     "start:client": "webpack-dev-server ./dist/client/index.js",
     "start": "yarn compile && concurrently \"yarn start:server\" \"yarn start:client\"",
-    "create-db": "psql -U postgres < ./src/db/schema.sql",
-    "seed": "yarn compile && yarn create-db && node ./dist/db/seed.js --product ../../data/product.csv --customer ../../data/customer.csv"
+    "create-db": "psql -U postgres < ./server/src/db/schema.sql",
+    "seed": "yarn compile && yarn create-db && node ./dist/server/src/db/seed.js --product ../../data/product.csv --customer ../../data/customer.csv"
   },
   "dependencies": {
     "@apollo/client": "^3.8.2",
     "@apollo/server": "^4.9.3",
     "csv-parser": "^3.0.0",
+    "csv-stringify": "^6.4.2",
     "dotenv": "^16.3.1",
     "graphql": "^16.8.0",
     "http-server": "^14.1.1",

@@ -1,7 +1,7 @@
 // Abstracts
 import Source from "./abstracts/Source.js";
 
-// Formats
+// Sources
 import Postgres from "./formats/Postgres.js";
 import CSV from "./formats/CSV.js";
 
@@ -13,10 +13,11 @@ class DataSource extends Source {
 
   /**
    * DataSource constructor
+   *
    * @param format The format that you wish to source the data from
    * @param type The type of data you wish to retrieve
    */
-  constructor(format: Format, type: DataType) {
+  constructor(format: Format, type: EntityType) {
     super(type);
     switch (format) {
       case "csv":
@@ -36,8 +37,18 @@ class DataSource extends Source {
    *
    * @returns Promise that resolves to an array of the specified data type
    */
-  async read<T>(): Promise<{ err: Error | null; res: T[] | null }> {
+  async read<T>(): Promise<ArrayResponse<T>> {
     return await this.creator.read<T>();
+  }
+
+  /**
+   * Write data to either Postgres or a CSV file, depending on what
+   * was specified at instantiation
+   *
+   * @returns Promise that resolves to an array of the specified data type
+   */
+  async write(data: Entity): Promise<ArrayResponse<Entity>> {
+    return await this.creator.write(data);
   }
 }
 

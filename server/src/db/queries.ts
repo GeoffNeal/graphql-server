@@ -1,9 +1,6 @@
 /* READ */
 export const getAllProducts = "SELECT * FROM products;";
-export const getProductByVin = "SELECT * FROM products WHERE vin = $1";
 export const getAllCustomers = "SELECT * FROM customers;";
-export const getCustomerBySurname =
-  "SELECT * FROM customers WHERE surname = $1";
 
 /* WRITE */
 export const insertProduct =

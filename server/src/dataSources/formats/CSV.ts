@@ -4,13 +4,13 @@ import path from "path";
 import Source from "../abstracts/Source.js";
 
 // CSV
-import { readCSV } from "../../utils/data.js";
+import { readCSV, writeCSV } from "../../utils/csv.js";
 
 /**
  * Class for accessing csv files
  */
 class CSV extends Source {
-  constructor(type: DataType) {
+  constructor(type: EntityType) {
     super(type);
   }
 
@@ -18,17 +18,38 @@ class CSV extends Source {
    * Reads from a csv file located in the `data` directory in the root
    * of the project.
    *
-   * @returns Promise that resolves to an array of the specified data type
+   * @returns Promise that resolves to an array of csv rows
    */
-  async read<T>(): Promise<{ err: Error | null; res: T[] | null }> {
+  async read<T>(): Promise<ArrayResponse<T>> {
     try {
       // Attempt to read csv file for specified type
-      const res = (await readCSV(
+      const res = await readCSV<T>(
         path.resolve(process.cwd(), `data/${this.type}.csv`)
-      )) as T[];
+      );
       return { err: null, res };
     } catch (err) {
       return { err, res: null };
+    }
+  }
+
+  /**
+   * Writes to a csv file located in the `data` directory in the root
+   * of the project.
+   *
+   * The file it writes to will depend on the arguments this instance
+   * was given at instantiation.
+   *
+   * @param data JSON object to convert to a csv row
+   * @returns Promise that resolves to an array of csv rows
+   */
+  async write(data: Entity): Promise<void> {
+    try {
+      await writeCSV<Entity>(
+        path.resolve(process.cwd(), `data/${this.type}.csv`),
+        data
+      );
+    } catch (err) {
+      console.error(err);
     }
   }
 }

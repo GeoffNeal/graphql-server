@@ -3447,6 +3447,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"csv-stringify@npm:^6.4.2":
+  version: 6.4.2
+  resolution: "csv-stringify@npm:6.4.2"
+  checksum: de8f394634e9745e0bc50d25312125204ca492a945f3e892af63cc340d371fdf653120c6bf2ff8ec2c9ce86b09e8455d7b5267cf91c7278e81a5f8c1b100105f
+  languageName: node
+  linkType: hard
+
 "date-fns@npm:^2.30.0":
   version: 2.30.0
   resolution: "date-fns@npm:2.30.0"
@@ -4242,6 +4249,7 @@ __metadata:
     copy-webpack-plugin: ^11.0.0
     css-loader: ^6.8.1
     csv-parser: ^3.0.0
+    csv-stringify: ^6.4.2
     dotenv: ^16.3.1
     graphql: ^16.8.0
     html-webpack-plugin: ^5.5.3

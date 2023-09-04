@@ -1,62 +1,40 @@
 import { QueryResult, Client, PoolClient } from "pg";
 
 // DB
-import db from "../../db/db.js";
-import { getAllProducts, getAllCustomers } from "../../db/queries.js";
+import db from "../../db/postgres.js";
 
 // Abstracts
 import Source from "../abstracts/Source.js";
+
+// Utils
+import {
+  getReadSQLQuery,
+  getWriteData,
+  getWriteSQLQuery,
+} from "../../utils/postgres.js";
 
 /**
  * Class representing a Postgres DB
  */
 class Postgres extends Source {
-  /**
-   * The Postgres client
-   */
-  private client: Client & PoolClient;
-
-  constructor(type: DataType) {
+  constructor(type: EntityType) {
     super(type);
   }
 
   /**
-   * Connect to a Postgres db
-   */
-  async connect() {
-    this.client = await db.connect();
-  }
-
-  /**
-   * Get the SQL query relating to specified type
-   * @returns A Postgres SQL query
-   */
-  getSQLQuery() {
-    switch (this.type) {
-      case "product":
-        return getAllProducts;
-      case "customer":
-        return getAllCustomers;
-      default:
-        throw new Error(`\`${this.type}\` is not a valid type`);
-    }
-  }
-
-  /**
-   * Reads from a postgres database.
    *
-   * @returns Promise that resolves to an array of the specified data type
+   * @param cb
+   * @returns
    */
-  async read<T>(): Promise<{ err: Error | null; res: T[] | null }> {
+  async attemptQuery<T>(
+    cb: (client: Client & PoolClient) => Promise<QueryResult<T>>
+  ): Promise<ArrayResponse<T>> {
     // Connect to db
-    await this.connect();
-
-    // Ensure you are using the correct pg query
-    const dbQuery: string = this.getSQLQuery();
+    const client = await db.connect();
 
     try {
-      // Run the query to retrieve all rows relating to the specified type
-      const res: QueryResult<T> = await this.client.query(dbQuery);
+      // Run the provided query
+      const res = await cb(client);
 
       // Format the response so that it has the same structure
       // for both successful and unsuccessful requests.
@@ -73,8 +51,40 @@ class Postgres extends Source {
       return { err, res: null };
     } finally {
       // Close the connection when finished
-      this.client.release();
+      client.release();
     }
+  }
+
+  /**
+   * Reads from a Postgres database.
+   *
+   * @returns Promise that resolves to an array of the specified data type
+   */
+  async read<T>(): Promise<ArrayResponse<T>> {
+    // Ensure you are using the correct pg query
+    // TODO: This needs to be more extensible
+    const dbQuery: string = getReadSQLQuery(this.type);
+
+    // Run the query to retrieve all rows relating to the specified type
+    return await this.attemptQuery<T>(
+      async (client) => await client.query(dbQuery)
+    );
+  }
+
+  /**
+   * Perform a write operation to a Postgres database
+   *
+   * @param data The entity to insert into the database
+   * @returns
+   */
+  async write(data: Entity): Promise<void> {
+    // Ensure you are using the correct pg query
+    const dbQuery: string = getWriteSQLQuery(this.type);
+
+    // Run the query to write an entity to a table in the database
+    await this.attemptQuery<Entity>(
+      async (client) => await client.query(dbQuery, getWriteData(data))
+    );
   }
 }
 

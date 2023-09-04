@@ -3,17 +3,23 @@
  * types of data source
  */
 abstract class Source implements ISource {
-  type: DataType;
+  type: EntityType;
 
-  constructor(type: DataType) {
+  constructor(type: EntityType) {
     this.type = type;
   }
 
   /**
    * Inheriting classes are expected to implement this method
-   * to get data from their specified data source
+   * to get all data from their specified data source
    */
-  abstract read<T>(): Promise<{ err: Error | null; res: T[] | null }>;
+  abstract read<T>(): Promise<ArrayResponse<T>>;
+
+  /**
+   * Inheriting classes are expected to implement this method
+   * to write an item to the specified data source
+   */
+  abstract write(data: Entity): Promise<void>;
 }
 
 export default Source;

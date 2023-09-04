@@ -5,7 +5,7 @@ const resolvers = {
       _: any,
       __: any,
       // Apollo server context includes a dataSources property
-      { dataSources }: { dataSources: GQLDataSources }
+      { dataSources }: ApolloContext
     ) => {
       const { err, res } = await dataSources.products.read<Product>();
 
@@ -23,7 +23,7 @@ const resolvers = {
     product: async (
       _: any,
       args: { vin: string },
-      { dataSources }: { dataSources: GQLDataSources }
+      { dataSources }: ApolloContext
     ) => {
       const { err, res } = await dataSources.products.read<Product>();
 
@@ -35,11 +35,7 @@ const resolvers = {
       return res.find((product: Product) => product.vin === args.vin);
     },
 
-    customers: async (
-      _: any,
-      __: any,
-      { dataSources }: { dataSources: GQLDataSources }
-    ) => {
+    customers: async (_: any, __: any, { dataSources }: ApolloContext) => {
       const { err, res } = await dataSources.customers.read<Customer>();
 
       if (err) {
@@ -52,7 +48,7 @@ const resolvers = {
     customer: async (
       _: any,
       args: { surname: string },
-      { dataSources }: { dataSources: GQLDataSources }
+      { dataSources }: ApolloContext
     ) => {
       const { err, res } = await dataSources.customers.read<Customer>();
 
@@ -63,6 +59,37 @@ const resolvers = {
       // Return the customer with the matching surname
       return res.find(
         (customer: Customer) => customer.surname === args.surname
+      );
+    },
+  },
+  Mutation: {
+    addProduct: async (
+      _,
+      args: { product: Product },
+      { dataSources }: ApolloContext
+    ) => {
+      const { err, res } = await dataSources.products.write(args.product);
+
+      if (err) {
+        throw new Error(err.message);
+      }
+
+      return res.find((product: Product) => product.vin === args.product.vin);
+    },
+
+    addCustomer: async (
+      _,
+      args: { customer: Customer },
+      { dataSources }: ApolloContext
+    ) => {
+      const { err, res } = await dataSources.customers.write(args.customer);
+
+      if (err) {
+        throw new Error(err.message);
+      }
+
+      return res.find(
+        (customer: Customer) => customer.surname === args.customer.surname
       );
     },
   },

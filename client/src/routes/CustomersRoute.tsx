@@ -53,8 +53,6 @@ const Product = ({ customer }) => {
 export default function CustomersRoute() {
   const { data, loading } = useQuery(query);
 
-  console.log("DATA: ", loading, data);
-
   if (loading) return <h3>Loading...</h3>;
 
   return (
