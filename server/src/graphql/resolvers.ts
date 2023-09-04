@@ -68,13 +68,8 @@ const resolvers = {
       args: { product: Product },
       { dataSources }: ApolloContext
     ) => {
-      const { err, res } = await dataSources.products.write(args.product);
-
-      if (err) {
-        throw new Error(err.message);
-      }
-
-      return res.find((product: Product) => product.vin === args.product.vin);
+      await dataSources.products.write(args.product);
+      return "Operation complete";
     },
 
     addCustomer: async (
@@ -82,15 +77,8 @@ const resolvers = {
       args: { customer: Customer },
       { dataSources }: ApolloContext
     ) => {
-      const { err, res } = await dataSources.customers.write(args.customer);
-
-      if (err) {
-        throw new Error(err.message);
-      }
-
-      return res.find(
-        (customer: Customer) => customer.surname === args.customer.surname
-      );
+      await dataSources.customers.write(args.customer);
+      return "Operation complete";
     },
   },
 };

@@ -45,10 +45,10 @@ const typeDefs = `#graphql
   type Mutation {
     # This mutation takes a Product and
     # responds with the new Product entry
-    addProduct(product: ProductInput!): void
+    addProduct(product: ProductInput!): String
     # This mutation takes a Customer and
     # responds with the new Customer entry
-    addCustomer(customer: CustomerInput!): void
+    addCustomer(customer: CustomerInput!): String
   }
 `;
 

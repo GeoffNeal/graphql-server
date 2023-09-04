@@ -22,9 +22,11 @@ class Postgres extends Source {
   }
 
   /**
+   * Essentially a wrapper around a query attempt so that errors
+   * can be caught but the boilerplate doesn't need to be repeated
    *
-   * @param cb
-   * @returns
+   * @param cb Callback function that runs the actual query
+   * @returns The result of the query
    */
   async attemptQuery<T>(
     cb: (client: Client & PoolClient) => Promise<QueryResult<T>>
