@@ -31,6 +31,7 @@ export const writeCSV = async <T>(filepath: string, data: T): Promise<void> => {
   // Convert object into csv string
   const createCsvRow = (obj: T, headers = false) =>
     Object.entries(obj).map(([key, value]) =>
+      // If headers is specified then return the column keys instead of the values
       headers ? `${key}` : `${value}`
     );
 
