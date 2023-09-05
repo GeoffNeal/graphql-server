@@ -78,13 +78,12 @@ yarn start
 
 This app is built using React Router. I was going to use NextJS but it felt like that would be cheating, and also the amount of boilerplate that comes with it would mean that you'd be sifting through it trying to find what I actually wrote. Either way I hope you like it.
 
-Visit `http://localhost:3000` where the front end should be served.
+Visit `http://localhost:8080` where the front end should be served.
 
 From there you can navigate where you like. If you go to `Create`, you should be able to enter new customers and products to your desired data source.
 
 _Things I didn't have time to implement_
 
-- I haven't put in a proper web server, and the app is served using `webpack-dev-server`. What the means is that if you refresh the page from anywhere but the home page you'll get an error and will need to manually head back to the root.
 - Unfortunately I didn't have time to implement any form validation, so at the moment you can enter empty values.
 - Error handling could be better
 
