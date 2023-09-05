@@ -1,7 +1,6 @@
 import { resolve as _resolve } from "path";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import CopyPlugin from "copy-webpack-plugin";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
@@ -21,6 +20,11 @@ const config = {
      */
     filename: "client.bundle.js",
   },
+  /** "target"
+   * because we want the output to be
+   * able to run on a browser, we need
+   * set the target to `web`
+   */
   target: "web",
   resolve: {
     /** "extensions"
@@ -53,11 +57,6 @@ const config = {
       filename: "index.html",
       template: "./client/index.html",
     }),
-    // new CopyPlugin({
-    //   patterns: [
-    //     { from: "./client/styles.global.css", to: "styles.global.css" },
-    //   ],
-    // }),
     new MiniCssExtractPlugin(),
   ],
 };

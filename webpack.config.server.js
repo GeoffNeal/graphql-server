@@ -19,13 +19,33 @@ const config = {
     publicPath: "/dist/server/",
     /** "filename"
      * the name of the output file
+     * here [name] represents the name
+     * of the chunk as determined by
+     * `entry`. For example, the `server`
+     * chunk will become `server.bundle.js`
      */
     filename: "[name].bundle.js",
+    /** "chunkFormat"
+     * lets webpack know to output the chunks
+     * as es modules. This is only possible
+     * because we have set `experiments.outputModule`
+     * to true
+     */
     chunkFormat: "module",
   },
   experiments: {
+    /** "outputModule"
+     * as es modules are still experimental
+     * in webpack we need to explicitly tell
+     * the compiler that we want this feature
+     */
     outputModule: true,
   },
+  /** "target"
+   * in this case we want to target
+   * the node environment, as we are
+   * not going to use this in the browser
+   */
   target: "node",
   resolve: {
     /** "extensions"
