@@ -82,7 +82,6 @@ export default function CreateProduct() {
                 name="price"
                 id="price"
                 value={formValues.price}
-                type="number"
               />
             </FormCol>
 
