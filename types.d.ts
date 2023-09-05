@@ -60,6 +60,26 @@ type ApolloContext = {
   };
 };
 
+interface Callback<ArgType, Ret = void> {
+  (...args: ArgType[]): Ret;
+}
+interface ArgCollector<ArgType> {
+  (...args: ArgType[]): void;
+}
+
+/**
+ * Type definition for the `callAll` util function
+ * which provides the developer with the ability to
+ * call multiple functions at the same time with the
+ * same arguments. This is useful for using multiple
+ * event handlers for the same event.
+ */
+interface Caller {
+  <ArgType>(
+    ...fns: (Callback<ArgType, void> | undefined)[]
+  ): ArgCollector<ArgType>;
+}
+
 /**
  * Used for classes that inherit from `Source`, so that
  * we can be sure they implement these methods

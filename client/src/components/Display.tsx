@@ -7,7 +7,7 @@ const List = styled.ul`
 `;
 
 export const Item = styled.li`
-  margin: 1rem;
+  margin: var(--default-margin);
   width: calc(100% / 3 - 2rem);
 `;
 
@@ -19,19 +19,19 @@ const Image = styled.div<{ src?: string }>`
 
 const Details = styled.div`
   display: flex;
-  padding: 1rem;
-  background-color: #f7f7f7;
+  padding: var(--default-padding);
+  background-color: var(--grey-lighter);
 `;
 
 // Wrap each child in one of these
-export const DisplayItem = ({ imgSrc, children }) => {
+export function DisplayItem({ imgSrc, children }) {
   return (
     <Item>
       <Image src={imgSrc} />
       <Details>{children}</Details>
     </Item>
   );
-};
+}
 
 export default function Display({ children }) {
   return <List>{children}</List>;

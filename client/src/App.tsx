@@ -7,6 +7,10 @@ import RootRoute from "./routes/RootRoute.js";
 import HomeRoute from "./routes/HomeRoute.js";
 import ProductsRoute from "./routes/ProductsRoute.js";
 import CustomersRoute from "./routes/CustomersRoute.js";
+import CreateRoute from "./routes/CreateRoute.js";
+import CreateRootRoute from "./routes/CreateRootRoute.js";
+import CreateCustomerRoute from "./routes/CreateCustomerRoute.js";
+import CreateProductRoute from "./routes/CreateProductRoute.js";
 import ErrorRoute from "./routes/ErrorRoute.js";
 
 // Styles
@@ -34,6 +38,24 @@ const router = createBrowserRouter([
       {
         path: "/customers",
         element: <CustomersRoute />,
+      },
+      {
+        path: "/create",
+        element: <CreateRoute />,
+        children: [
+          {
+            path: "/create",
+            element: <CreateRootRoute />,
+          },
+          {
+            path: "/create/customer",
+            element: <CreateCustomerRoute />,
+          },
+          {
+            path: "/create/product",
+            element: <CreateProductRoute />,
+          },
+        ],
       },
     ],
   },
