@@ -1,9 +1,9 @@
 // Abstracts
-import Source from "./abstracts/Source.js";
+import Source from "./abstracts/Source";
 
 // Sources
-import Postgres from "./formats/Postgres.js";
-import CSV from "./formats/CSV.js";
+import Postgres from "./formats/Postgres";
+import CSV from "./formats/CSV";
 
 /**
  * Provides functionality to retrieve data from a specified source

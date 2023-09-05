@@ -1,10 +1,10 @@
 import path from "path";
 
 // Abstracts
-import Source from "../abstracts/Source.js";
+import Source from "../abstracts/Source";
 
 // CSV
-import { readCSV, writeCSV } from "../../utils/csv.js";
+import { readCSV, writeCSV } from "../../utils/csv";
 
 /**
  * Class for accessing csv files

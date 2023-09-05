@@ -3,7 +3,7 @@ import {
   insertCustomer,
   getAllProducts,
   getAllCustomers,
-} from "../db/queries.js";
+} from "../db/queries";
 
 /**
  *

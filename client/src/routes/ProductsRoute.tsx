@@ -2,7 +2,7 @@ import { useQuery, gql } from "@apollo/client";
 import { styled } from "styled-components";
 
 // Components
-import Display, { DisplayItem } from "../components/Display.js";
+import Display, { DisplayItem } from "../components/Display";
 
 const query = gql`
   {

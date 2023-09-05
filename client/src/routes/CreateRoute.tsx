@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 // Components
-import Link from "../components/Link.js";
+import Link from "../components/Link";
 
 const List = styled.ul`
   display: flex;

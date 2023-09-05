@@ -2,6 +2,9 @@ import fs from "fs";
 import csvParser from "csv-parser";
 import { stringify } from "csv-stringify/sync";
 
+// Utils
+import { getFilePath } from "./general";
+
 /**
  * Converts the contents of a specified .csv file to JSON
  *
@@ -9,7 +12,7 @@ import { stringify } from "csv-stringify/sync";
  * @returns A Promise that resolves to an array containing the rows of the .csv
  */
 export const readCSV = async <T>(filepath: string): Promise<T[]> => {
-  const fp = new URL(filepath, import.meta.url);
+  const fp = getFilePath(filepath);
 
   return await new Promise((resolve, reject) => {
     const results: T[] = [];

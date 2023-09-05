@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 // Components
-import SideDrawer from "./SideDrawer.js";
+import SideDrawer from "./SideDrawer";
 
 const Link = styled(NavLink)`
   padding: var(--default-padding);

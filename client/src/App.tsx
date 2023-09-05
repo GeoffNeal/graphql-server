@@ -3,18 +3,18 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Routes
-import RootRoute from "./routes/RootRoute.js";
-import HomeRoute from "./routes/HomeRoute.js";
-import ProductsRoute from "./routes/ProductsRoute.js";
-import CustomersRoute from "./routes/CustomersRoute.js";
-import CreateRoute from "./routes/CreateRoute.js";
-import CreateRootRoute from "./routes/CreateRootRoute.js";
-import CreateCustomerRoute from "./routes/CreateCustomerRoute.js";
-import CreateProductRoute from "./routes/CreateProductRoute.js";
-import ErrorRoute from "./routes/ErrorRoute.js";
+import RootRoute from "./routes/RootRoute";
+import HomeRoute from "./routes/HomeRoute";
+import ProductsRoute from "./routes/ProductsRoute";
+import CustomersRoute from "./routes/CustomersRoute";
+import CreateRoute from "./routes/CreateRoute";
+import CreateRootRoute from "./routes/CreateRootRoute";
+import CreateCustomerRoute from "./routes/CreateCustomerRoute";
+import CreateProductRoute from "./routes/CreateProductRoute";
+import ErrorRoute from "./routes/ErrorRoute";
 
 // Styles
-import "../styles.global.css";
+import "../public/styles.global.css";
 
 const client = new ApolloClient({
   uri: "http://127.0.0.1:4000",

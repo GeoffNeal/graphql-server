@@ -4,7 +4,7 @@ import { DocumentNode } from "graphql";
 import styled from "styled-components";
 
 // Components
-import Form from "./Form.js";
+import Form from "./Form";
 
 const Message = styled.div`
   display: flex;

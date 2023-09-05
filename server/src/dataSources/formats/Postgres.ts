@@ -1,17 +1,17 @@
 import { QueryResult, Client, PoolClient } from "pg";
 
 // DB
-import db from "../../db/postgres.js";
+import db from "../../db/postgres";
 
 // Abstracts
-import Source from "../abstracts/Source.js";
+import Source from "../abstracts/Source";
 
 // Utils
 import {
   getReadSQLQuery,
   getWriteData,
   getWriteSQLQuery,
-} from "../../utils/postgres.js";
+} from "../../utils/postgres";
 
 /**
  * Class representing a Postgres DB

@@ -2,11 +2,11 @@ import path from "path";
 import dotenv from "dotenv";
 
 // db
-import db from "./postgres.js";
-import { insertProduct, insertCustomer } from "./queries.js";
+import db from "./postgres";
+import { insertProduct, insertCustomer } from "./queries";
 
 // Utils
-import { readCSV } from "../utils/csv.js";
+import { readCSV } from "../utils/csv";
 
 //load the .env file
 dotenv.config();

@@ -2,8 +2,8 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 // Components
-import Link from "../components/Link.js";
-import SideDrawer from "../components/SideDrawer.js";
+import Link from "../components/Link";
+import SideDrawer from "../components/SideDrawer";
 
 const Main = styled.main`
   display: flex;

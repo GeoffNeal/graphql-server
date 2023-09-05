@@ -2,10 +2,10 @@ import { useState } from "react";
 import { gql } from "@apollo/client";
 
 // Components
-import Create from "./Create.js";
-import { TextField } from "./Input.js";
-import { FormCol, FormRow } from "./Form.js";
-import Button from "./Button.js";
+import Create from "./Create";
+import { TextField } from "./Input";
+import { FormCol, FormRow } from "./Form";
+import Button from "./Button";
 
 /**
  * Mutation to create a new customer
