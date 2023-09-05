@@ -15,7 +15,6 @@ import {
 // Data source
 import DataSource from "../src/dataSources";
 
-// jest.mock("../src/utils/csv");
 jest.mock("../src/dataSources/formats/CSV");
 jest.mock("../src/dataSources/formats/Postgres");
 
