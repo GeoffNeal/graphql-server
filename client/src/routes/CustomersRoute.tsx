@@ -1,17 +1,11 @@
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { styled } from "styled-components";
 
 // Components
 import Display, { DisplayItem } from "../components/Display";
 
-const query = gql`
-  {
-    customers {
-      forename
-      surname
-    }
-  }
-`;
+// Graphql
+import { getCustomersQuery } from "../graphql/queries";
 
 const Name = styled.p`
   width: 100%;
@@ -19,7 +13,7 @@ const Name = styled.p`
 `;
 
 export default function CustomersRoute() {
-  const { data, loading } = useQuery(query);
+  const { data, loading } = useQuery(getCustomersQuery);
 
   if (loading) return <h3>Loading...</h3>;
 

@@ -21,6 +21,20 @@ type Customer = {
 };
 
 /**
+ * Identical to Product but all fields
+ * are optional. This is because sometimes
+ * we don't query for all fields in a gql request
+ */
+type PartialProduct = Partial<Product>;
+
+/**
+ * Identical to Customer but all fields
+ * are optional. This is because sometimes
+ * we don't query for all fields in a gql request
+ */
+type PartialCustomer = Partial<Customer>;
+
+/**
  * Anything that can have it's own table in a database
  * and can be queried for.
  *

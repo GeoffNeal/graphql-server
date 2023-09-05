@@ -7,14 +7,8 @@ import { TextField } from "./Input";
 import { FormCol, FormRow } from "./Form";
 import Button from "./Button";
 
-/**
- * Mutation to create a new customer
- */
-const createCustomerMutation = gql`
-  mutation CreateCustomer($customer: CustomerInput!) {
-    addCustomer(customer: $customer)
-  }
-`;
+// Graphql
+import { createCustomerMutation } from "../graphql/mutations";
 
 export default function CreateCustomer() {
   const [formValues, setFormValues] = useState<Customer>({

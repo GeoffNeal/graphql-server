@@ -26,6 +26,7 @@ class CSV extends Source {
       const res = await readCSV<T>(
         path.resolve(process.cwd(), `data/${this.type}.csv`)
       );
+
       return { err: null, res };
     } catch (err) {
       return { err, res: null };

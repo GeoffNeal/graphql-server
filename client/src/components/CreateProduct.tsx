@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { gql } from "@apollo/client";
 
 // Components
 import Create from "./Create";
@@ -7,14 +6,8 @@ import { TextField } from "./Input";
 import { FormCol, FormRow } from "./Form";
 import Button from "./Button";
 
-/**
- * Mutation to create a new product
- */
-const createProductMutation = gql`
-  mutation CreateProduct($product: ProductInput!) {
-    addProduct(product: $product)
-  }
-`;
+// Graphql
+import { createProductMutation } from "../graphql/mutations";
 
 export default function CreateProduct() {
   const [formValues, setFormValues] = useState<Product>({
