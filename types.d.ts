@@ -74,10 +74,10 @@ type ApolloContext = {
   };
 };
 
-interface Callback<ArgType, Ret = void> {
+interface ICallback<ArgType, Ret = void> {
   (...args: ArgType[]): Ret;
 }
-interface ArgCollector<ArgType> {
+interface IArgCollector<ArgType> {
   (...args: ArgType[]): void;
 }
 
@@ -88,10 +88,10 @@ interface ArgCollector<ArgType> {
  * same arguments. This is useful for using multiple
  * event handlers for the same event.
  */
-interface Caller {
+interface ICaller {
   <ArgType>(
-    ...fns: (Callback<ArgType, void> | undefined)[]
-  ): ArgCollector<ArgType>;
+    ...fns: (ICallback<ArgType, void> | undefined)[]
+  ): IArgCollector<ArgType>;
 }
 
 /**
