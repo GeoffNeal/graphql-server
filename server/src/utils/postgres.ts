@@ -9,7 +9,7 @@ import {
  * Because the write queries require data to be input
  * in a certain order we need to be able to specify
  * which fields go in what order. To do that we need to
- * which entity we have
+ * know which entity we have
  *
  * @param data An entity
  * @returns An array with the fields of the entity, in the order required by the SQL query
